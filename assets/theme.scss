@@ -6,42 +6,84 @@ $font-family-sans-serif: "Arial", serif !default;
 /*-- scss:rules --*/
 
 .reveal {
-  background-image: url("assets/heading.png");
+  background-image: url("https://raw.githubusercontent.com/yng-me/r-package-dev-slides/main/assets/heading.png");
   background-repeat: no-repeat;
   background-size: contain, cover;
 }
 
+.reveal p, .reveal .slide ul li {
+  font-size: 2.2rem;
+}
 
 .reveal h1 {
   color: #0070C0;
   font-size: 4rem;
   border-bottom: 2px solid #eeeeee;
-  padding-bottom: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.reveal h2 {
+  font-size: 3rem;
+  color: #0070C0;
+  margin-top: 80px !important;
+}
+
+.reveal h4 {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  color: #5c5c5c;
+  font-style: italic;
+}
+
+.reveal .subtitle {
+  padding-top: 30px;
+  margin-bottom: 0 !important;
+  font-size: 2.5rem;
 }
 
 
-.reveal .quarto-title-authors {
-  padding-top: 20px;
+.reveal .quarto-title-author {
+  font-size: 1.75rem;
+  color: #7c7c7c;
+  margin-top: -5px !important;
 }
 
+.reveal .date {
+  padding-top: 30px;
+  margin-bottom: 0 !important;
+  font-size: 2rem;
+}
+
+
+.reveal .slide-menu-button {
+  bottom: 5px !important;
+}
 
 .reveal .footer {
-  color: #ffffff;
+  color: #eeeeee !important;
   background-color: #0070C0;
   bottom: 0 !important;
   height: 45px;
 }
 
-.reveal h2 {
-  font-size: 3.25rem;
-  color: #0070C0;
-  margin-top: 80px !important;
-}
-
-.reveal p {
-  font-size: 2.25rem;
+.reveal .footer > p {
+  text-align: left;
+  padding-left: 50px;
+  color: #eeeeee;
+  margin-top: 11px;
+  font-size: 18px !important;
+  font-style: italic;
 }
 
 .reveal ul > li > a {
   font-size: 2rem;
+}
+
+.reveal .slide-number {
+  bottom: 7px !important;
+  right: 30px !important;
+  top: unset !important;
+  color: #ffffff !important;
+  font-size: 20px !important;
 }

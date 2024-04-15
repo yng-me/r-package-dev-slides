@@ -1,12 +1,25 @@
 ---
 title: "Development of R package <br>and its benefits in managing the CBMS Data"
-author: "Bhas Abdulsamad"
-date: "17 April 2024"
+subtitle: "Bhas Abdulsamad"
+author: "Community-Based Statistics Division"
+date: "04/17/2024"
+date-format: "D MMMM YYYY"
 format: 
   revealjs:
+    slide-number: true
     embed-resources: true
     theme: assets/theme.scss
+    include-after-body: assets/clean_title_page.html
+    footer: "Development of R package and its benefits in managing the CBMS Data"
 ---
+
+## Presentation outline
+
+- Motivation
+- Benefits of developing your own package
+- R package development basics
+- Demo
+- Useful references
 
 ## Benefits
 
@@ -18,6 +31,7 @@ Package development
 - Automate tedious jobs
 - Separation of concerns
   
+
 
 ## R package development principles
 
@@ -56,9 +70,8 @@ create_new_folder <- function(folder_name, ...) {
 
 ## 
 
-![](assets/design.svg)
+![](https://raw.githubusercontent.com/yng-me/r-package-dev-slides/58b655e4711b27f37abaca2618c77d723e856363/assets/design.svg)
 
-![](assets/heading.png)
 
 ## Utility and helper functions
 
@@ -87,6 +100,13 @@ generate_validation(cv, references, config)
 
 ## Useful References
 
+#### R package development
+
 - [R Packages (2e)](https://r-pkgs.org/) 
 - [Building R packages with devtools and usethis](https://www.youtube.com/watch?v=EpTkT6Rkgbs&t=377s)
 - [It's a Great Time to be an R Package Developer!](https://www.youtube.com/watch?v=hfqjyeA_z7s&t=369s)
+
+#### Slides
+
+- [Development of R package and its benefits in managing the CBMS Data](https://github.com/yng-me/r-package-dev-slides)
+
