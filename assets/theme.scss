@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: "Arial", serif !default;
+
+/*-- scss:rules --*/
+
+.reveal {
+  background-image: url("assets/heading.png");
+  background-repeat: no-repeat;
+  background-size: contain, cover;
+}
+
+
+.reveal h1 {
+  color: #0070C0;
+  font-size: 4rem;
+  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 20px;
+}
+
+
+.reveal .quarto-title-authors {
+  padding-top: 20px;
+}
+
+
+.reveal .footer {
+  color: #ffffff;
+  background-color: #0070C0;
+  bottom: 0 !important;
+  height: 45px;
+}
+
+.reveal h2 {
+  font-size: 3.25rem;
+  color: #0070C0;
+  margin-top: 80px !important;
+}
+
+.reveal p {
+  font-size: 2.25rem;
+}
+
+.reveal ul > li > a {
+  font-size: 2rem;
+}

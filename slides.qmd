@@ -1,0 +1,92 @@
+---
+title: "Development of R package <br>and its benefits in managing the CBMS Data"
+author: "Bhas Abdulsamad"
+date: "17 April 2024"
+format: 
+  revealjs:
+    embed-resources: true
+    theme: assets/theme.scss
+---
+
+## Benefits
+
+Package development
+
+- testable unit
+- documentation
+- efficient distribution
+- Automate tedious jobs
+- Separation of concerns
+  
+
+## R package development principles
+
+Packages are the fundamental units of **reproducible** R code. They include **reusable** R functions, the **documentation** that describes how to use them, and **sample data** (Hadley Wickham and Jennifer Bryan, 2023).
+
+## Utility and helper functions
+
+```{r, eval=F, echo=T}
+?dir.create
+
+dir.create("My Project Folder")
+```
+
+```{r, eval=T, echo=T, warning=T}
+dir.create("My Project Folder")
+```
+
+## Utility and helper functions
+
+```{r, eval=F, echo=T}
+create_new_folder <- function(folder_name, ...) {
+  if(!dir.exists(folder_name)) {
+    dir.create(folder_name, ...)
+  }
+}
+
+
+create_new_folder <- function(folder_name, ...) {
+  lapply(folder_name, function(x) {
+    if(!dir.exists(x)) {
+      dir.create(x, ...)
+    }
+  })
+}
+```
+
+## 
+
+![](assets/design.svg)
+
+![](assets/heading.png)
+
+## Utility and helper functions
+
+```{r, eval=F, echo=T}
+library(rcbms)
+config <- set_config("configs")
+references <- load_references(config)
+parquet <- read_cbms_data(references, config)
+
+cv <- rcbms_list("cv")
+for(i in seq_along(config$input_data)) {
+  current_input_data <- config$input_data[i]
+  script_files <- references$script_files |> 
+    dplyr::filter(input_data == current_input_data) |> 
+    dplyr::pull(file)
+  
+  lapply(script_files, source)
+  
+}
+
+generate_validation(cv, references, config)
+
+```
+
+## Demo
+
+## Useful References
+
+- [R Packages (2e)](https://r-pkgs.org/) 
+- [Building R packages with devtools and usethis](https://www.youtube.com/watch?v=EpTkT6Rkgbs&t=377s)
+- [It's a Great Time to be an R Package Developer!](https://www.youtube.com/watch?v=hfqjyeA_z7s&t=369s)
