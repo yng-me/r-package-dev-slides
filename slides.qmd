@@ -248,7 +248,7 @@ set_config <- function(config_file, cwd = NULL) {
 ::: incremental
 
 - Performance issues (since all helper functions must be pre-loaded to the environment)
-- `core` scripts are visible and can be still be modified by anyone. Either done intentionally or accidentally, it could introduce potential bugs or produce inconsistent results.
+- `core` scripts are visible and can still be modified by anyone. Either done intentionally or accidentally, it could introduce potential bugs or produce inconsistent results.
 - Lack of unit testing
 - Lack of proper documentation
 
