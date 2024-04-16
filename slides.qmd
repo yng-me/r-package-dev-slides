@@ -27,7 +27,7 @@ topic_04 <- "Useful references"
 
 - `r topic_01`
 - `r topic_02`
-- `r topic_03`
+- `r topic_03` + demo
 - `r topic_04`
 
 :::
@@ -179,7 +179,7 @@ topic_04 <- "Useful references"
 
 - Most of the heavy lifting is done inside the `core`:
 
-  - `preload` - sequence of operation to be executed
+  - `preload` - sequence of operations to be executed
 
 :::
 
@@ -204,7 +204,7 @@ topic_04 <- "Useful references"
 
 - Most of the heavy lifting is done inside the `core`:
 
-  - `preload` - sequence of operation to be executed
+  - `preload` - sequence of operations to be executed
   
   - `helpers` - collection of utility and helper functions (around **100** user-defined functions)
 
