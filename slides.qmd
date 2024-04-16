@@ -13,69 +13,305 @@ format:
     footer: "Development of R package and its benefits in managing the CBMS Data"
 ---
 
-## Presentation outline
+```{r, echo=F}
+topic_01 <- "What motivates us to develop our own package"
+topic_02 <- "Benefits of developing our own R package"
+topic_03 <- "The RCBMS ecosystem"
+topic_04 <- "Useful references"
+```
 
-- Motivation
-- Benefits of developing your own package
-- R package development basics
-- Demo
-- Useful references
 
-## Benefits
+## Topics of discussion
 
-Package development
+- `r topic_01`
+- `r topic_02`
+- `r topic_03`
+- `r topic_04`
 
-- testable unit
-- documentation
-- efficient distribution
-- Automate tedious jobs
-- Separation of concerns
+
+# `r topic_01`
+
+---
+
+## RCBMS-One project structure
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/01-project-structure.png)
+
+:::
+
+::: {.column width="45%"}
+
+- We created a folder structure to establish a convention 
+
+::: incremental
+
+- It defines a scope and separation of concerns
+
+:::
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
+
+
+## RCBMS-One project structure
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/02-index.png)
+
+:::
+
+::: {.column width="45%"}
+
+- We created folder structure to establish a convention 
+- It defines a scope and separation of concerns
+- This helps us implement layer of abstractions for efficiency
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
+
+## RCBMS-One config
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/03-config.png)
+
+:::
+
+::: {.column width="45%"}
+
+- To dictate the behavior of the entire script, we use a configuration file 
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
+
+## RCBMS-One config
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/04-config.png)
+
+:::
+
+::: {.column width="45%"}
+
+- To dictate the behavior of the entire script, we use a configuration file 
+
+- It allows users with zero background in R to use the script 
+
+::: incremental
+
+- This file is also used to interact with RCBMS App 
+
+:::
+
+:::
+
+::: footer
+`r topic_01`
+:::
+
+::::
+
+
+## RCBMS-One core
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/05-core.png)
+
+:::
+
+::: {.column width="45%"}
+
+- Most of the heavy lifting is done inside the `core`:
+
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
+
+## RCBMS-One core: preload
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/06-preload.png)
+
+:::
+
+::: {.column width="45%"}
+
+- Most of the heavy lifting is done inside the `core`:
+
+  - `preload` - sequence of operation to be executed
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
+
+
+## RCBMS-One core: helpers
+
+:::: {.columns}
+
+::: {.column width="55%"}
+
+![](assets/07-helpers.png)
+
+:::
+
+::: {.column width="45%"}
+
+- Most of the heavy lifting is done inside the `core`:
+
+  - `preload` - sequence of operation to be executed
   
+  - `helpers` - collection of utility and helper functions (around **100** user-defined functions)
+
+:::
+
+::::
+
+::: footer
+`r topic_01`
+:::
 
 
-## R package development principles
+## RCBMS-One core: helpers
 
-Packages are the fundamental units of **reproducible** R code. They include **reusable** R functions, the **documentation** that describes how to use them, and **sample data** (Hadley Wickham and Jennifer Bryan, 2023).
+#### `set_config()`
 
-## Utility and helper functions
-
-```{r, eval=F, echo=T}
-?dir.create
-
-dir.create("My Project Folder")
-```
-
-```{r, eval=T, echo=T, warning=T}
-dir.create("My Project Folder")
-```
-
-## Utility and helper functions
-
-```{r, eval=F, echo=T}
-create_new_folder <- function(folder_name, ...) {
-  if(!dir.exists(folder_name)) {
-    dir.create(folder_name, ...)
+```{r, echo=T, eval=F}
+set_config <- function(config_file, cwd = NULL) {
+  valid_type_ext <- c('yml', 'json')
+  ext <- tools::file_ext(config_file)
+  if(!(ext[1] %in% valid_type_ext)) {
+    stop("Accepts only YAML or JSON file format.")
   }
-}
-
-
-create_new_folder <- function(folder_name, ...) {
-  lapply(folder_name, function(x) {
-    if(!dir.exists(x)) {
-      dir.create(x, ...)
-    }
-  })
+  
+  if(is.null(cwd)) file <- clean_path(config_file)
+  else file <- clean_path(paste0(cwd, '/', config_file))
+  
+  if(ext == 'yml') config <- yaml::read_yaml(file, readLines.warn = F)
+  if(ext == 'json') config <- jsonlite::fromJSON(file)
+  
+  return(config)
 }
 ```
 
-## 
+::: footer
+`r topic_01`
+:::
 
-![](https://raw.githubusercontent.com/yng-me/r-package-dev-slides/58b655e4711b27f37abaca2618c77d723e856363/assets/design.svg)
+## Is this implementation optimal?
+
+::: incremental
+
+- Performance issues (since all helper functions must be pre-loaded to the environment)
+- `core` scripts are visible and can be still be modified by anyone. Either done intentionally or accidentally, it could introduce potential bugs or produce inconsistent results.
+- Lack of unit testing
+- Lack of proper documentation
+
+:::
+
+::: footer
+`r topic_01`
+:::
 
 
-## Utility and helper functions
+# `r topic_02`
 
-```{r, eval=F, echo=T}
+---
+
+## What is an R package?
+
+> Packages are the fundamental units of **reproducible** R code. They include **reusable** R functions, the **documentation** that describes how to use them, and **sample data**.
+
+<p style="text-align: right; font-style: italic; font-size: 24px; padding-right: 100px">\- Hadley Wickham and Jennifer Bryan, 2023</p>
+
+
+::: footer
+`r topic_02`
+:::
+
+
+## `r topic_02`
+
+
+::: incremental
+
+- Reusable codes
+- Separation of concerns
+- Automate tedious and repetitive tasks (DRY principle)
+- Improve performance
+- Proper documentation
+- Unit testing
+- Reproducible results
+- Integration with other CBMS systems and applications
+
+:::
+
+::: footer
+`r topic_02`
+:::
+
+
+# `r topic_03`
+
+---
+
+## System design (simplified version)
+
+
+![](assets/design.svg)
+
+
+::: footer
+`r topic_03`
+:::
+
+
+
+## Using `rcbms` package
+
+```{r, eval=F, echo=T, `code-line-numbers`="|1|2|3|4|6|7-16|17"}
 library(rcbms)
 config <- set_config("configs")
 references <- load_references(config)
@@ -96,7 +332,24 @@ generate_validation(cv, references, config)
 
 ```
 
-## Demo
+::: footer
+`r topic_03`
+:::
+
+
+## Using `rcbms` package
+
+![](assets/08-docs.png)
+
+::: footer
+`r topic_03`
+:::
+
+
+# Demo
+
+---
+
 
 ## Useful References
 
